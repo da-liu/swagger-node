@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const router = express.Router()
 const bodyParser = require('body-parser')
 
@@ -92,10 +93,15 @@ router.route('/users/:userId')
 
 router.param('userId', getUserById)
 
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load(path.join(__dirname, './swagger.yml'))
+
 app.use('/api/v1', router)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('Swagger Node.js Demo')
 })
 
 app.listen(3000, () => {
