@@ -25,10 +25,6 @@ paths:
       - Users
       summary: "Add a new user"
       description: "Create new user in system"
-      consumes:
-      - "application/json"
-      produces:
-      - application/json
       parameters:
       - in: "body"
         name: "body"
